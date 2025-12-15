@@ -8,7 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -24,10 +27,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.icycodes.whatsapp.R
+import com.icycodes.whatsapp.presentation.bottomnavigation.BottomNavigation
+import com.icycodes.whatsapp.presentation.chat_box.ChatDesignModel
 
 @Composable
 @Preview(showSystemUi = true)
 fun HomeScreen() {
+
+    val chatData = listOf(
+        ChatDesignModel(R.drawable.rajkummar_rao, "raj_kumar_rao", "10.00", "Hi"),
+        ChatDesignModel(R.drawable.ajay_devgn, "ajay_devgan", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.akshay_kumar, "akshay", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.bhuvan_bam, "buhavan", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.boy, "boy", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.boy1, "boy1", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.boy3, "boy3", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.carryminati, "carry", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.disha_patani, "ajay_devgan", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.girl, "ajay_devgan", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.kartik_aaryan, "ajay_devgan", "11.00", "Hey"),
+        ChatDesignModel(R.drawable.girl, "ajay_devgan", "11.00", "Hey"),
+    )
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -42,7 +62,8 @@ fun HomeScreen() {
                     modifier = Modifier.size(28.dp)
                 )
             }
-        }
+        },
+        bottomBar = { BottomNavigation() }
     ) {
         Column(modifier = Modifier.padding(it)) {
 
@@ -84,6 +105,14 @@ fun HomeScreen() {
                     }
                 }
             }
+            HorizontalDivider()
+
+            LazyColumn {
+                items(chatData) {
+                    ChatDesign(chatDesignModel = it)
+                }
+            }
+
         }
     }
 }
