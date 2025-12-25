@@ -34,10 +34,11 @@ fun UpdateScreen() {
             }
         }, bottomBar = {
             BottomNavigation()
-        }
+        },
+        topBar = { TopBar("Updates", false) }
     ) {
         Column(modifier = Modifier.padding(it)) {
-            TopBar("Updates", false)
+
         }
     }
 }

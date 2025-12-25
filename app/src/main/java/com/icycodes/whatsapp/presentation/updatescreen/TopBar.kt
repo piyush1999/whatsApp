@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,6 +30,10 @@ import com.icycodes.whatsapp.R
 @Composable
 fun TopBar(pageName: String, colorFlag: Boolean) {
     var isSearching by remember {
+        mutableStateOf(false)
+    }
+
+    var showMenu by remember {
         mutableStateOf(false)
     }
 
@@ -56,7 +62,7 @@ fun TopBar(pageName: String, colorFlag: Boolean) {
                 )
             }
 
-            IconButton(onClick = {isSearching=true}) {
+            IconButton(onClick = { isSearching = true }) {
                 Icon(
                     painter = painterResource(R.drawable.search),
                     contentDescription = null,
@@ -64,12 +70,25 @@ fun TopBar(pageName: String, colorFlag: Boolean) {
                 )
             }
 
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                showMenu = true
+            }) {
                 Icon(
                     painter = painterResource(R.drawable.more),
                     contentDescription = null,
                     modifier = Modifier.size(24.dp)
                 )
+                DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
+                    DropdownMenuItem(
+                        text = { Text(text = "Status Privacy") },
+                        onClick = { showMenu = false })
+                    DropdownMenuItem(
+                        text = { Text(text = "Create channel") },
+                        onClick = { showMenu = false })
+                    DropdownMenuItem(
+                        text = { Text(text = "Settings") },
+                        onClick = { showMenu = false })
+                }
             }
         }
     }
@@ -78,6 +97,6 @@ fun TopBar(pageName: String, colorFlag: Boolean) {
 
 @Composable
 @Preview(showSystemUi = true)
-fun Test(){
-    TopBar("Updates",false)
+fun Test() {
+    TopBar("Updates", false)
 }
