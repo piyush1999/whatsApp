@@ -23,19 +23,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.icycodes.whatsapp.R
 
 @Composable
-@Preview(showSystemUi = true)
 fun MyStatus() {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 15.dp)
+            .padding(12.dp), verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier.align(Alignment.CenterVertically)) {
             Image(
@@ -53,8 +51,10 @@ fun MyStatus() {
                     .size(25.dp)
                     .align(Alignment.BottomEnd)
                     .padding(2.dp)
-                    .background(color = colorResource(R.color.light_green),
-                        shape = CircleShape),
+                    .background(
+                        color = colorResource(R.color.light_green),
+                        shape = CircleShape
+                    ),
                 tint = Color.White
             )
         }
@@ -62,18 +62,50 @@ fun MyStatus() {
 
         Column {
             Text(
-                text = "piyush",
-                fontSize = 20.sp,
+                text = "My Status",
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
             )
 
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Time",
+                text = "Tap to add status update",
                 fontSize = 15.sp,
                 color = Color.Gray,
                 fontWeight = FontWeight.SemiBold,
             )
+        }
+    }
+}
+
+data class StatusData(
+    val image :Int,
+    val name: String,
+    val time: String
+)
+
+@Composable
+fun StatusItem(statusData: StatusData) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            contentDescription = null,
+            painter = painterResource(id = statusData.image),
+            modifier = Modifier
+                .size(60.dp)
+                .padding(4.dp)
+                .clip(shape = CircleShape),
+            contentScale = ContentScale.Crop
+        )
+        Spacer(Modifier.width(12.dp))
+
+        Column {
+            Text(text = statusData.name, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(text = statusData.time, fontSize = 14.sp, color = Color.Gray)
         }
     }
 }
